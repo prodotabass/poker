@@ -5,8 +5,32 @@ import java.util.List;
 public class Checker {
 
     public static String checkHand(String[] stringCards) {
+        if(stringCards.length != 5)
+            throw new IllegalArgumentException();
+        List<Card> cards = new ArrayList();
+        for (String c: stringCards) {
+            cards.add(stringToCard(c));
+        }
+
+        for(int i = 0; i < cards.size() - 1; i++) {
+            for(int j = i + 1; j < cards.size(); j++) {
+                if((cards.get(i)).equals(cards.get(j))) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
         return "";
     }
+    
+        private static String checkFullHouse(List<Card> cards) {
+        Checker.Combination comb = checkCombination(cards);
+        if(comb.getCount() != 3)
+            return null;
+        Checker.Combination comb1 = checkTwoPairs(cardsToRanks(cards), comb.getRank());
+        return comb1.getCount() != 22? null : comb.getRank().toString() + "S FULL OF " + comb1.getRank().toString() + "S";
+
+    }
+    
     private static Checker.Combination checkCombination(List<Card> cards) {
         List<Card.Rank> ranks = cardsToRanks(cards);
         int count = 0;
