@@ -7,7 +7,31 @@ public class Checker {
     public static String checkHand(String[] stringCards) {
         return "";
     }
+    
+private static boolean checkFlush(List<Card> cards) {
+        Card.Suit suit = cards.get(0).getSuit();
+        for (Card c : cards) {
+            if (!c.getSuit().equals(suit))
+                return false;
+        }
+        return true;
+    }
 
+    private static boolean checkStraight(List<Card> cards) {
+        List<Card.Rank> ranks = cardsToRanks(cards);
+        int lowest = ranks.get(0).ordinal();
+
+        for(int i = 1; i < ranks.size(); ++i) {
+            if(lowest + 1 != ranks.get(i).ordinal()) {
+                return false;
+            }
+
+            lowest++;
+        }
+
+        return true;
+    }
+    
     private static Card.Rank getHighest(List<Card> cards) {
         List<Card.Rank> ranks = cardsToRanks(cards);
        return ranks.get(ranks.size() - 1);
