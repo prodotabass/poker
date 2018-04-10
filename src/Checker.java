@@ -19,7 +19,32 @@ public class Checker {
                 }
             }
         }
-        return "";
+        
+        boolean flush = checkFlush(cards);
+        boolean straight = checkStraight(cards);
+        String checkFullHouse = checkFullHouse(cards);
+        Combination comb = checkCombination(cards);
+        Card.Rank highest = getHighest(cards);
+        if(flush && straight)
+            if(highest.equals(Card.Rank.ACE))
+                return "ROYAL FLUSH";
+            else
+                return highest.toString() + "-HIGH STRAIGHT FLUSH";
+        if(comb.getCount() == 4)
+            return "FOUR OF " + comb.getRank().toString() + "S";
+        if(checkFullHouse != null)
+            return checkFullHouse;
+        if(flush)
+            return highest.toString() + "-HIGH FLUSH";
+        if(straight)
+            return highest.toString() + "-HIGH STRAIGHT";
+        if(comb.getCount() == 3)
+            return "THREE OF " + comb.getRank().toString() + "S";
+        if(comb.getCount() == 22)
+            return comb.getRank().toString() + "-HIGH TWO PAIRS";
+        if(comb.getCount() == 2)
+            return "PAIR OF " + comb.getRank().toString() + "S";
+        return "NOTHING, HIGHEST CARD - " + highest.toString();
     }
     
         private static String checkFullHouse(List<Card> cards) {
@@ -114,9 +139,10 @@ private static boolean checkFlush(List<Card> cards) {
     }
 
     private static List<Card.Rank> cardsToRanks(List<Card> cards) {
-        List<Card.Rank> ranks = new ArrayList<>();
-        for (Card card:cards) {
-            ranks.add(card.getRank());
+       List<Card.Rank> ranks = new ArrayList();
+
+        for (Card c : cards) {
+            ranks.add(c.getRank());
         }
         Collections.sort(ranks);
         return ranks;
@@ -124,7 +150,7 @@ private static boolean checkFlush(List<Card> cards) {
 
     private static Card stringToCard(String card) {
         String[] words = card.split(" ");
-        if (words.length < 3 || !words[1].equals("of"))
+        if(words.length != 3 || !words[1].equals("of")
             throw new IllegalArgumentException();
         Card.Rank rank = Card.Rank.valueOf(words[0].toUpperCase());
         Card.Suit suit = Card.Suit.valueOf(words[2].toUpperCase());
@@ -141,11 +167,11 @@ private static boolean checkFlush(List<Card> cards) {
         }
 
         public Card.Rank getRank() {
-            return rank;
+            return this.rank;
         }
 
         public int getCount() {
-            return count;
+            return this.count;
         }
     }
 }
