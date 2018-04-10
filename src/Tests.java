@@ -59,3 +59,5 @@ import org.junit.Test;
                  "Six of Spades"};
        String result = Checker.checkHand(cards);
     }
+
+}
