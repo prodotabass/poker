@@ -7,58 +7,59 @@ public class Checker {
     public static String checkHand(String[] stringCards) {
         return "";
     }
-    private static Checker.Combination checkCombination(List<Card> cards) { 
-List<Card.Rank> ranks = cardsToRanks(cards); 
-int count = 0; 
-int currCount = 0; 
-Card.Rank rank = ranks.get(0); 
-Card.Rank currRank = ranks.get(0); 
-for (Card.Rank r : ranks) { 
-if(r.equals(currRank)) { 
-++currCount; 
-} else { 
-currRank = r; 
-currCount = 1; 
-} 
+    private static Checker.Combination checkCombination(List<Card> cards) {
+        List<Card.Rank> ranks = cardsToRanks(cards);
+        int count = 0;
+        int currCount = 0;
+        Card.Rank rank = ranks.get(0);
+        Card.Rank currRank = ranks.get(0);
+        for (Card.Rank r : ranks) {
+            if(r.equals(currRank)) {
+                ++currCount;
+            } else {
+                currRank = r;
+                currCount = 1;
+            }
 
-if(currCount > count) { 
-count = currCount; 
-rank = currRank; 
-} 
-} 
+            if(currCount > count) {
+                count = currCount;
+                rank = currRank;
+            }
+        }
 
-if(count != 2) 
-return new Checker.Combination(rank, count); 
-Checker.Combination comb = checkTwoPairs(ranks, rank); 
-if(comb.getCount() == 22) 
-return new Checker.Combination(comb.getRank().ordinal() > rank.ordinal()?comb.getRank():rank, 22); 
-return comb; 
-} 
+        if(count != 2)
+            return new Checker.Combination(rank, count);
+        Checker.Combination comb = checkTwoPairs(ranks, rank);
+        if(comb.getCount() == 22)
+            return new Checker.Combination(comb.getRank().ordinal() > rank.ordinal()?comb.getRank():rank, 22);
+        return comb;
+    }
 
-private static Checker.Combination checkTwoPairs(List<Card.Rank> ranks, Card.Rank rank) { 
-int newCount = 0; 
-int currCount = 0; 
-Card.Rank newRank = ranks.get(0); 
-Card.Rank currRank = ranks.get(0); 
+    private static Checker.Combination checkTwoPairs(List<Card.Rank> ranks, Card.Rank rank) {
+        int newCount = 0;
+        int currCount = 0;
+        Card.Rank newRank = ranks.get(0);
+        Card.Rank currRank = ranks.get(0);
 
-for (Card.Rank r : ranks) { 
-if(r.equals(currRank)) { 
-++currCount; 
-} else { 
-currRank = r; 
-currCount = 1; 
-} 
+        for (Card.Rank r : ranks) {
+            if(r.equals(currRank)) {
+                ++currCount;
+            } else {
+                currRank = r;
+                currCount = 1;
+            }
 
-if(currCount > newCount && !currRank.equals(rank)) { 
-newCount = currCount; 
-newRank = currRank; 
-} 
-} 
+            if(currCount > newCount && !currRank.equals(rank)) {
+                newCount = currCount;
+                newRank = currRank;
+            }
+        }
 
-if(newCount == 2) 
-return new Checker.Combination(newRank, 22); 
-return new Checker.Combination(rank, 2); 
-}
+        if(newCount == 2)
+            return new Checker.Combination(newRank, 22);
+        return new Checker.Combination(rank, 2);
+    }
+
 private static boolean checkFlush(List<Card> cards) {
         Card.Suit suit = cards.get(0).getSuit();
         for (Card c : cards) {
