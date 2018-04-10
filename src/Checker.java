@@ -8,7 +8,10 @@ public class Checker {
         return "";
     }
 
-
+    private static Card.Rank getHighest(List<Card> cards) {
+        List<Card.Rank> ranks = cardsToRanks(cards);
+       return ranks.get(ranks.size() - 1);
+    }
 
     private static List<Card.Rank> cardsToRanks(List<Card> cards) {
         List<Card.Rank> ranks = new ArrayList<>();
