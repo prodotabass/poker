@@ -149,12 +149,14 @@ private static boolean checkFlush(List<Card> cards) {
     }
 
     private static Card stringToCard(String card) {
-        String[] words = card.split(" ");
-        if(words.length != 3 || !words[1].equals("of")
+        String suitS = card.substring(card.length()-1,card.length());
+        String rankS = card.substring(0, card.length() - 1);
+        Card.Rank rank = Card.stringToRank(rankS);
+        Card.Suit suit = Card.stringToSuit(suitS);
+        if ((suit == null) || (rank == null)) {
             throw new IllegalArgumentException();
-        Card.Rank rank = Card.Rank.valueOf(words[0].toUpperCase());
-        Card.Suit suit = Card.Suit.valueOf(words[2].toUpperCase());
-        return new Card(rank, suit);
+        }
+        return new Card(rank,suit);
     }
 
     private static class Combination {

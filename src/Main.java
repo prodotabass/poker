@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
-        System.out.print("Введите пять карт(пример: Two of Spades и тд) через enter: ");
+        System.out.print("Введите пять карт(пример: 2s, qd и т.д.) через enter: ");
         String[] cards = {
                 in.nextLine(),
                 in.nextLine(),
@@ -12,6 +12,5 @@ public class Main {
                 in.nextLine()};
 
         System.out.println(Checker.checkHand(cards));
-
     }
 }

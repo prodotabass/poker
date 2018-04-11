@@ -1,66 +1,54 @@
 import org.junit.Test;
- 
- 
- 
+
+
+
  import static org.junit.Assert.*;
- 
+
  public class Tests {
  
      @Test(expected= IllegalArgumentException.class)
      public void testInvalidCardNumber(){
          String[] cards = {
-                 "Two of Spades",
-                 "Three of Clubs",
-                 "Four of Hearts",
-                 "Five of Spades"};
+                 "2s",
+                 "3c",
+                 "4h",
+                 "5s"};
          String result = Checker.checkHand(cards);
      }
  
      @Test(expected= IllegalArgumentException.class)
      public void testRepeatingCards(){
          String[] cards = {
-                 "Two of Spades",
-                 "Three of Clubs",
-                 "Four of Hearts",
-                 "Five of Spades",
-                 "Five of Spades"};
+                 "2s",
+                 "3c",
+                 "4h",
+                 "5s",
+                 "5s"};
          String result = Checker.checkHand(cards);
      }
  
      @Test(expected= IllegalArgumentException.class)
      public void testInvalidRank(){
          String[] cards = {
-                 "Tw of Spades", //mistake here
-                 "Three of Clubs",
-                 "Four of Hearts",
-                 "Five of Spades",
-                 "Six of Spades"};
+                 "1S", //mistake here
+                 "3c",
+                 "4h",
+                 "5s",
+                 "6s"};
          String result = Checker.checkHand(cards);
      }
  
      @Test(expected= IllegalArgumentException.class)
      public void testInvalidSuit(){
          String[] cards = {
-                 "Two of Spades",
-                 "Three of Clubs",
-                 "Four of Hearts",
-                 "Five of Spaves", //mistake here
-                 "Six of Spades"};
+                 "2s",
+                 "c",
+                 "4h",
+                 "5n", //mistake here
+                 "6s"};
          String result = Checker.checkHand(cards);
      }
- 
-     @Test(expected= IllegalArgumentException.class)
-     public void testMissingOf(){
-         String[] cards = {
-                 "Two of Spades",
-                 "Three of Clubs",
-                 "Four of Hearts",
-                 "Five  Spades", //mistake here
-                 "Six of Spades"};
-       String result = Checker.checkHand(cards);
-    }
-
-@Test
+    @Test
     public void TestCardCreation() {
         Card.Rank rank = Card.Rank.NINE;
         Card.Suit suit = Card.Suit.DIAMONDS;
@@ -72,110 +60,110 @@ import org.junit.Test;
     @Test
     public void TestStraight() {
         String[] cards = {
-                "Two of Spades",
-                "Three of Clubs",
-                "Four of Hearts",
-                "Five of Spades",
-                "Six of Diamonds"};
+                "2S",
+                "3C",
+                "4H",
+                "5S",
+                "6D"};
         assertEquals(Checker.checkHand(cards), "SIX-HIGH STRAIGHT");
     }
 
-    @Test
+   @Test
     public void TestRoyalFlush() {
         String[] cards = {
-                "King of Hearts",
-                "Jack of Hearts",
-                "Ace of Hearts",
-                "Queen of Hearts",
-                "Ten of Hearts"};
+                "kh",
+                "jh",
+                "ah",
+                "qh",
+                "10h"};
         assertEquals(Checker.checkHand(cards), "ROYAL FLUSH");
     }
 
     @Test
     public void TestStraightFlush() {
         String[] cards = {
-                "King of Hearts",
-                "Jack of Hearts",
-                "Nine of Hearts",
-                "Queen of Hearts",
-                "Ten of Hearts"};
+                "kh",
+                "jh",
+                "9h",
+                "qh",
+                "10h"};
         assertEquals(Checker.checkHand(cards), "KING-HIGH STRAIGHT FLUSH");
     }
 
     @Test
     public void TestFour() {
         String[] cards = {
-                "Ten of Diamonds",
-                "Jack of Hearts",
-                "Ten of Hearts",
-                "Ten of Spades",
-                "Ten of Clubs"};
+                "10d",
+                "jh",
+                "10h",
+                "10s",
+                "10c"};
         assertEquals(Checker.checkHand(cards), "FOUR OF TENS");
     }
   
   @Test
     public void TestFullHouse() {
         String[] cards = {
-                "Jack of Diamonds",
-                "Jack of Hearts",
-                "Ten of Hearts",
-                "Ten of Spades",
-                "Ten of Clubs"};
+                "jd",
+                "jh",
+                "10h",
+                "10s",
+                "10c"};
         assertEquals(Checker.checkHand(cards),"TENS FULL OF JACKS");
     }
 
     @Test
     public void TestFlush() {
         String[] cards = {
-                "Ten of Clubs",
-                "Jack of Clubs",
-                "Two of Clubs",
-                "Queen of Clubs",
-                "Four of Clubs"};
+                "10c",
+                "jc",
+                "2c",
+                "qc",
+                "4c"};
         assertEquals(Checker.checkHand(cards),"QUEEN-HIGH FLUSH");
     }
 
     @Test
     public void TestThree() {
         String[] cards = {
-                "Ten of Clubs",
-                "Queen of Diamonds",
-                "Queen of Hearts",
-                "Queen of Clubs",
-                "Four of Clubs"};
+                "10c",
+                "qd",
+                "qh",
+                "qc",
+                "4c"};
         assertEquals(Checker.checkHand(cards),"THREE OF QUEENS");
     }
 
     @Test
     public void TestTwoPairs() {
         String[] cards = {
-                "Ten of Clubs",
-                "Two of Diamonds",
-                "Queen of Hearts",
-                "Queen of Clubs",
-                "Two of Clubs"};
+                "10c",
+                "2d",
+                "qh",
+                "qc",
+                "2c"};
         assertEquals(Checker.checkHand(cards),"QUEEN-HIGH TWO PAIRS");
     }
 
     @Test
     public void TestPair() {
         String[] cards = {
-                "Ten of Clubs",
-                "Two of Diamonds",
-                "Jack of Hearts",
-                "Queen of Clubs",
-                "Two of Clubs"};
+                "10c",
+                "2d",
+                "jh",
+                "qc",
+                "2c"};
         assertEquals(Checker.checkHand(cards),"PAIR OF TWOS");
     }
 
     @Test
     public void TestNoCombination() {
         String[] cards = {
-                "Ten of Clubs",
-                "Two of Diamonds",
-                "Jack of Hearts",
-                "Queen of Clubs",
-                "Five of Clubs"};
+                "10c",
+                "2d",
+                "jh",
+                "qc",
+                "5c"};
         assertEquals(Checker.checkHand(cards),"NOTHING, HIGHEST CARD - QUEEN");
     }
 }
