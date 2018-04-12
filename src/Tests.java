@@ -147,11 +147,11 @@ import org.junit.Test;
     @Test
     public void TestFlush() {
         String[] cards = {
-                "10c",
-                "jc",
-                "2c",
-                "qc",
-                "4c"};
+                "10h",
+                "jh",
+                "2h",
+                "qh",
+                "4h"};
         assertEquals(Checker.checkHand(cards),"QUEEN-HIGH FLUSH");
     }
 
@@ -169,12 +169,12 @@ import org.junit.Test;
     @Test
     public void TestTwoPairs() {
         String[] cards = {
-                "10c",
+               "10c",
                 "2d",
-                "qh",
-                "qc",
+                "jc",
+                "jh",
                 "2c"};
-        assertEquals(Checker.checkHand(cards),"QUEEN-HIGH TWO PAIRS");
+        assertEquals(Checker.checkHand(cards),"JACK-HIGH TWO PAIRS");
     }
 
     @Test
