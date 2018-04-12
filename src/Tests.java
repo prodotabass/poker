@@ -200,7 +200,7 @@ import org.junit.Test;
     }
   
    @Test
-    public void TestNoCombination() {
+    public void Test2NoCombination() {
         String[] cards = {
                 "10c",
                 "3d",
