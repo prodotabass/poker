@@ -155,6 +155,17 @@ import org.junit.Test;
         assertEquals(Checker.checkHand(cards),"QUEEN-HIGH FLUSH");
     }
 
+   @Test
+     public void Test1Flush() {
+         String[] cards = {
+                 "10c",
+                 "jc",
+                 "2c",
+                 "qc",
+                 "4c"};
+         assertEquals(Checker.checkHand(cards),"QUEEN-HIGH FLUSH");
+     }
+  
     @Test
     public void TestThree() {
         String[] cards = {
