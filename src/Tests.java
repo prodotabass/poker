@@ -5,6 +5,38 @@ import org.junit.Test;
  import static org.junit.Assert.*;
 
  public class Tests {
+  
+        @Test(expected= IllegalArgumentException.class)
+     public void testNeedlessSpace(){
+         String[] cards = {
+                 "2s",
+                 "3c",
+                 "4 h",
+                 "5s",
+                 "5c"};
+         String result = Checker.checkHand(cards);
+     }
+
+     @Test(expected= IllegalArgumentException.class)
+     public void testCardsOneLine(){
+         String[] cards = {
+                 "6s kc ah 3h 10s ",
+                 " ",
+                 " ",
+                 " ",
+                 " "};
+         String result = Checker.checkHand(cards);
+     }
+     @Test(expected= IllegalArgumentException.class)
+     public void testInvalidLanguage(){
+         String[] cards = {
+                 "2s",
+                 "3c",
+                 "4h",
+                 "5s",
+                 "5ч"};
+         String result = Checker.checkHand(cards);
+     }
  
      @Test(expected= IllegalArgumentException.class)
      public void testInvalidCardNumber(){
