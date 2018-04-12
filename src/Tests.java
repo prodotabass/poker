@@ -198,4 +198,15 @@ import org.junit.Test;
                 "5c"};
         assertEquals(Checker.checkHand(cards),"NOTHING, HIGHEST CARD - KING");
     }
+  
+   @Test
+    public void TestNoCombination() {
+        String[] cards = {
+                "10c",
+                "3d",
+                "jh",
+                "6c",
+                "5c"};
+        assertEquals(Checker.checkHand(cards),"NOTHING, HIGHEST CARD - JACK");
+    }
 }
