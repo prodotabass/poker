@@ -189,6 +189,16 @@ import org.junit.Test;
     }
 
     @Test
+    public void Test2Pair() {
+        String[] cards = {
+                "10c",
+                "3d",
+                "jh",
+                "qc",
+                "3c"};
+        assertEquals(Checker.checkHand(cards),"PAIR OF TWOS");
+    }
+    @Test
     public void TestNoCombination() {
         String[] cards = {
                 "10c",
